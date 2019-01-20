@@ -1,7 +1,7 @@
 # Kubernetes The Hard Way (Vagrant)
+This fork  use libvirt driver and very minimal system requirements.
 
 Vagrant configuration and scripts for a Kubernetes setup, the hard way.
-
 The setup follows https://github.com/kelseyhightower/kubernetes-the-hard-way
 with the following exceptions:
 
