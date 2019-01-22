@@ -10,8 +10,7 @@ source "${dir}/versions.bash"
 pushd "${dir}/../"
 trap 'popd' EXIT
 
-for i in {0..2}; do
-  cat <<EOF | vagrant ssh "controller-${i}" -- sudo bash
+cat <<EOF | vagrant ssh controller -- sudo bash
 
 cp "/vagrant/tools/etcd-${etcd_version}-linux-amd64/etcd"* /usr/local/bin
 
@@ -30,4 +29,3 @@ systemctl daemon-reload
 systemctl enable etcd
 systemctl start etcd
 EOF
-done

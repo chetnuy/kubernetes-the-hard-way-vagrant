@@ -7,8 +7,7 @@ readonly dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 pushd "${dir}/../"
 trap 'popd' EXIT
 
-for i in {0..2}; do
-  cat <<'EOF' | vagrant ssh "controller-${i}" -- sudo bash
+cat <<'EOF' | vagrant ssh "controller" -- sudo bash
 
 mkdir -p /var/lib/kubernetes
 
@@ -42,9 +41,8 @@ systemctl enable kube-apiserver kube-controller-manager kube-scheduler
 systemctl start kube-apiserver kube-controller-manager kube-scheduler
 EOF
 
-  until vagrant ssh "controller-${i}" -- curl --ipv4 --fail --silent --max-time 3 "http://127.0.0.1:8080/api" &>/dev/null; do
-    echo "Waiting for kube-apiserver to become ready in controller-${i}..."
+  until vagrant ssh "controller" -- curl --ipv4 --fail --silent --max-time 3 "http://127.0.0.1:8080/api" &>/dev/null; do
+    echo "Waiting for kube-apiserver to become ready in controller..."
     sleep 3
   done
 
-done

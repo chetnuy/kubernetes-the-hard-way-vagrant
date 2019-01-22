@@ -7,12 +7,12 @@ readonly dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 pushd "${dir}/../certificates"
 trap 'popd' EXIT
 
-for i in {0..2}; do
+for i in {0..1}; do
 	cfssl gencert \
 		-ca=ca.pem \
 		-ca-key=ca-key.pem \
 		-config=ca-config.json \
-		-hostname="worker-${i},192.168.199.2$((i))" \
+		-hostname="worker-${i},192.168.121.2$((i))" \
 		-profile=kubernetes \
 		"worker-${i}-csr.json" | cfssljson -bare "worker-${i}"
 done
