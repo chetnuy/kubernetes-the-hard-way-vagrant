@@ -8,7 +8,7 @@ pushd "${dir}/../"
 trap 'popd' EXIT
 
 ./scripts/distclean
-#./scripts/download-tools
+./scripts/download-tools
 vagrant up
 ./scripts/generate-certs
 ./scripts/generate-kubeconfig-kube-proxy
